@@ -22,26 +22,32 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
+import net.sourceforge.jtds.jdbc.Driver;
+
 
 public class MainActivity extends Activity implements OnClickListener {
     Button button;
     EditText editText;
     TextView testTextView;
-    String text;
-    String StrXml="<Request><head>"
-	    		+ "<a>" +"57704.001"+ "</a>"
-	    		+ "<b>" + "57704" + "</b>"
-				+ "<c>" +"221204489"+"</c></head>"
-				+ "<data>"
-					+"<no Code='09'>"
-						+ "<d>" + text + "</d>"	
-			    		+ "<e>" + "aqar4wertaqrweatwerwer" + "</e>"
-			    		+ "<f>" + "20160513060601" + "</f>"
-			    		+ "<g></g>"
-			    		+ "<h></h>"
-			    		+ "<i></i>"
-			    		+ "<j>" + "00" + "</j></no>"
-				+ "</data></Request>";
+    String text = "0001";
+    String StrXml="<Request>"
+		    			+ "<head>"
+				    		+ "<a>" +"user"+ "</a>"
+				    		+ "<b>" + "state" + "</b>"
+							+ "<c>" +"developer"+"</c>"
+						+ "</head>"
+						+ "<data>"
+							+"<no Code='09'>"
+								+ "<d>" + text + "</d>"	
+					    		+ "<e>" + "aqar4werta" + "</e>"
+					    		+ "<f>" + "20160513060601" + "</f>"
+					    		+ "<g></g>"
+					    		+ "<h></h>"
+					    		+ "<i></i>"
+					    		+ "<j>" + "" + "</j>"
+					    	+ "</no>"
+						+ "</data>"
+					+ "</Request>";
     private static final String TAG = "MainActivity";
 
     @Override
