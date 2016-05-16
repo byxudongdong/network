@@ -19,6 +19,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
+import com.lidroid.xutils.util.LogUtils;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
@@ -29,25 +30,9 @@ public class MainActivity extends Activity implements OnClickListener {
     Button button;
     EditText editText;
     TextView testTextView;
-    String text = "0001";
-    String StrXml="<Request>"
-		    			+ "<head>"
-				    		+ "<a>" +"user"+ "</a>"
-				    		+ "<b>" + "state" + "</b>"
-							+ "<c>" +"developer"+"</c>"
-						+ "</head>"
-						+ "<data>"
-							+"<no Code='09'>"
-								+ "<d>" + text + "</d>"	
-					    		+ "<e>" + "aqar4werta" + "</e>"
-					    		+ "<f>" + "20160513060601" + "</f>"
-					    		+ "<g></g>"
-					    		+ "<h></h>"
-					    		+ "<i></i>"
-					    		+ "<j>" + "" + "</j>"
-					    	+ "</no>"
-						+ "</data>"
-					+ "</Request>";
+    String text;
+    String StrXml;
+    
     private static final String TAG = "MainActivity";
 
     @Override
@@ -61,6 +46,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		button.setOnClickListener(this);
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("net.sourceforge.jtds.jdbc.Driver");// 加载驱动程序
 		} catch (ClassNotFoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
@@ -105,7 +91,7 @@ public class MainActivity extends Activity implements OnClickListener {
     
 	public void sendUtils(String StrXml) {
 
-		HttpUtils httpUtils = new HttpUtils(3000);
+		HttpUtils httpUtils = new HttpUtils(8000);
 		RequestParams rp = new RequestParams();
 		rp.addBodyParameter("StrXml", StrXml);
 		rp.addBodyParameter("Checking_Key", "11");
@@ -148,7 +134,27 @@ public class MainActivity extends Activity implements OnClickListener {
 			
 			Log.d(TAG, "发送");
 			text=editText.getText().toString();
+			StrXml="<Request>"
+	    			+ "<head>"
+			    		+ "<a>" +"57704.001"+ "</a>"
+			    		+ "<b>" + "57704" + "</b>"
+						+ "<c>" +"221204489"+"</c>"
+					+ "</head>"
+					+ "<data>"
+						+"<no Code='09'>"
+							+ "<d>" + text + "</d>"	
+				    		+ "<e>" + "aqar4werta345" + "</e>"
+				    		+ "<f>" + "20160513060601" + "</f>"
+//				    		+ "<g></g>"
+//				    		+ "<h></h>"
+//				    		+ "<i></i>"
+//				    		+ "<j>" + "" + "</j>"
+				    	+ "</no>"
+					+ "</data>"
+				+ "</Request>";
+			LogUtils.d(StrXml);
 			sendUtils(StrXml);
+			
 		    
 			
 			break;
