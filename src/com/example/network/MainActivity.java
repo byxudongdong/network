@@ -8,8 +8,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -20,11 +19,8 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.util.LogUtils;
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
 
 import net.sourceforge.jtds.jdbc.Driver;
-
 
 public class MainActivity extends Activity implements OnClickListener {
     Button button;
@@ -44,27 +40,27 @@ public class MainActivity extends Activity implements OnClickListener {
 		editText=(EditText)findViewById(R.id.editText1);
 		testTextView=(TextView)findViewById(R.id.testTextView);
 		button.setOnClickListener(this);
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Class.forName("net.sourceforge.jtds.jdbc.Driver");// 加载驱动程序
-		} catch (ClassNotFoundException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
-		//String url = "http://192.168.8.135:3306/";
+
+		
 		String url = "jdbc:mysql://localhost:3306/aucton";
 		String user = "root";
 		String password = "123456";
-		//建立数据库连接，获取连接对象 conn
+		//建立数据库连接，获取连接对象 
+		
+		Connection con = null;  
 		try {
-			Connection conn = (Connection) DriverManager.getConnection(url,user,password);
+			Class.forName( "net.sourceforge.jtds.jdbc.Driver" );
+		} catch (ClassNotFoundException e1) {
+			// TODO 自动生成的 catch 块
+			e1.printStackTrace();
+		}
+		try {
+			con = DriverManager.getConnection(url,user,password);
 		} catch (SQLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		}
-		//生成一条SQL语句
-		String sql = "insert into tb_users(username,password,sex,age)values('张三','111','男','22')";
-		//Statement stmt = conn.createStatement();
+		}  
+		
     }
     
   
@@ -91,7 +87,7 @@ public class MainActivity extends Activity implements OnClickListener {
     
 	public void sendUtils(String StrXml) {
 
-		HttpUtils httpUtils = new HttpUtils(8000);
+		HttpUtils httpUtils = new HttpUtils(3000);
 		RequestParams rp = new RequestParams();
 		rp.addBodyParameter("StrXml", StrXml);
 		rp.addBodyParameter("Checking_Key", "11");
